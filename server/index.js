@@ -11,15 +11,27 @@ wss.on('connection', (ws) => {
   // tempLocation[0] is Latitude and tempLocation[1] is Longitude
   let tempLocation = []
 
+  const data = {
+    type: 'message',
+    data: 'Hi From server'
+  }
 
   ws.on('message', async (message) => {
-    parsedData = await JSON.parse(message)
-    console.log(parsedData.data)
-    
-    ws.send(JSON.stringify({
-      type: 'message',
-      data: 'Server Response'
-    }))
+    const parsedData = await JSON.parse(message)
+
+    switch (parsedData.type) {
+      case 'message':
+        console.log(parsedData.data)
+        break
+      
+      case 'location':
+        tempLocation = parsedData.data
+        console.log(`Lat: ${tempLocation[0]} Lon: ${tempLocation[1]}`)
+        break
+      
+        default:
+          console.log('Unrecognized type!')
+    }
   })
 
 })
