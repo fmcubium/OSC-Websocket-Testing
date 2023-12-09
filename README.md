@@ -4,4 +4,4 @@ Started by Alexander and Andres in order to test the viability of websockets for
 
 Currently in testing phase!
 
-*Want to help? Talk to AlexWala on the OSC discord in the #echologator channel!*
+*Want to help? Talk to AlexWala in the OSC discord in the #echologator channel!*
