@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location'
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { Button, StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
 
+uri = `ws://10.144.51.108:8080`
 
-const ws = new WebSocket('ws://10.144.51.81:8080');
+const ws = new WebSocket(uri);
 const data = {
   type: 'message',
   data: 'Hello world'
@@ -52,8 +53,7 @@ ws.onopen = () => {
 
 ws.onmessage = async (data) => {
   // a message was received
-  const parsedData = await JSON.parse(data.data)
-  console.log(parsedData.data)
+  console.log(data)
 };
 
 ws.onerror = e => {
@@ -83,8 +83,10 @@ export default function App() {
       setLocation(location);
       console.log(location)
       sendLocation(location)
-    })();
-  });
+    }
+    
+    )();
+  }, []);
 
   return (
     <SafeAreaView>
@@ -96,16 +98,20 @@ export default function App() {
           Press me
         </Button>
       </View>
+      <Text>
+        {location === null ? 'Loading': 'Location was captured!'}
+      </Text>
     </SafeAreaView>
   )
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   button: {
