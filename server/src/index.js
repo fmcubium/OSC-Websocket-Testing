@@ -5,9 +5,11 @@ const WebSocket = require('ws')
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
+app.post('/message/new', (req, res) => {
+  
+})
 
 wss.on('connection', (ws) => {
-
   // tempLocation[0] is Latitude and tempLocation[1] is Longitude
   let tempLocation = []
 
