@@ -2,10 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location'
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
+import { io } from 'socket.io-client';
+
 
 uri = `ws://10.144.51.108:8080`
 
-const ws = new WebSocket(uri);
+//const ws = new WebSocket(uri);
+export const socket = io(uri);
 const data = {
   type: 'message',
   data: 'Hello world'
