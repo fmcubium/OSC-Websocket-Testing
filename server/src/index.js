@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
-const http = require('http');
+// const http = require('http');
 const WebSocket = require('ws')
-const server = http.createServer(app)
-const wss = new WebSocket.Server({ server })
+const server = require('http').createServer(app)
+const wss = require('socket.io')(server, {
+  //remove cors when done with development
+  cors: {
+    origin: "http://localhost:3000"
+  }
+})
+
 
 app.post('/message/new', (req, res) => {
   
@@ -14,7 +20,7 @@ wss.on('connection', (ws) => {
   let tempLocation = []
 
   const data = {
-    type: 'message',
+    type: 'message', 
     data: 'Hi From server'
   }
 
