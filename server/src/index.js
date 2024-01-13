@@ -24,12 +24,12 @@ wss.on('connection', (ws) => {
     data: 'Hi From server'
   }
 
-  ws.on('message', async (message) => {
+  ws.on('message_get', async (message) => {
     const parsedData = await JSON.parse(message)
 
     switch (parsedData.type) {
       case 'message':
-        console.log(parsedData.data)
+        console.log(parsedData.data) // Store in db
         break
       
       case 'location':
